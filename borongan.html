@@ -12,11 +12,22 @@
       margin: 0;
       padding: 0;
     }
-
+    /* VISITOR COUNTER */
+    .visitor-counter {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255,255,255,0.9);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
     /* HEADER */
     .header {
       display: flex;
-      flex-wrap: wrap; /* ✅ allows stacking on mobile */
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       padding: 20px;
@@ -25,15 +36,15 @@
     }
     .logo-container {
       display: flex;
-      flex-wrap: wrap; /* ✅ stack catchline & logo on mobile */
+      flex-wrap: wrap;
       align-items: center;
-      gap: 15px;
+      gap: 5px;
       flex: 1;
-      min-width: 250px;
+      min-width: 10px;
     }
     .catchline-purpose {
       text-align: left;
-      max-width: 100%; /* ✅ full width on small screens */
+      max-width: 100%;
     }
     .catchline {
       font-size: 16px;
@@ -44,24 +55,23 @@
       margin-top: 5px;
     }
     .logo {
-      max-width: 120px; /* ✅ smaller on mobile */
+      max-width: 80px;
       height: auto;
     }
     .header img {
       max-width: 100%;
       height: auto;
     }
-
     /* SERVICES BUTTONS */
     .services {
       display: flex;
-      flex-wrap: wrap; /* ✅ makes buttons wrap */
+      flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
       margin: 15px;
     }
     .services button {
-      flex: 1 1 120px; /* ✅ auto resize buttons */
+      flex: 1 1 120px;
       padding: 10px;
       font-size: 14px;
       cursor: pointer;
@@ -69,8 +79,11 @@
       border-radius: 5px;
       background-color: #007bff;
       color: white;
+      transition: background 0.3s;
     }
-
+    .blink {
+      background-color: #ff5733 !important;
+    }
     /* WORKER CARDS */
     .worker-container {
       display: flex;
@@ -83,15 +96,15 @@
       background: white;
       padding: 15px;
       width: 100%;
-      max-width: 300px; /* ✅ prevents overflow */
+      max-width: 300px;
       border-radius: 10px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
     .worker-card img {
-      width: 100%; /* ✅ responsive image */
+      width: 100%;
       max-height: 350px;
-      object-fit: cover; /* ✅ keeps proportion */
+      object-fit: cover;
       border-radius: 10px;
     }
     .book-button {
@@ -104,7 +117,6 @@
       border-radius: 5px;
       cursor: pointer;
     }
-
     /* FOOTER */
     .footer {
       margin-top: 30px;
@@ -113,8 +125,12 @@
       padding: 10px;
       font-size: 14px;
     }
-
-    /* ✅ MOBILE MEDIA QUERIES */
+    .footer a {
+      color: yellow;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    /* MOBILE */
     @media (max-width: 768px) {
       .header {
         flex-direction: column;
@@ -124,27 +140,38 @@
         text-align: center;
       }
       .logo {
-        max-width: 100px;
+        max-width: 70px;
       }
     }
   </style>
 </head>
 <body>
+
+  <!-- Visitor Counter -->
+  <div class="visitor-counter">
+    Visitors: <span id="visitorCount">0</span>
+  </div>
+
+  <!-- Header -->
   <div class="header">
     <div class="logo-container">
       <div class="catchline-purpose">
         <p class="catchline">Your Reliable On-Call Manpower Provider in Borongan City</p>
         <p class="purpose">We provide skilled and experienced manpower for various services, ensuring quality and efficiency in every job.</p>
       </div>
-      <img src="https://github.com/SmartPropertySol/ESamarLots/blob/main/images/logo%20manpower.png?raw=true" alt="Company Logo" class="logo">
+      <img src="https://github.com/SmartPropertySol/ESamarLots/blob/main/images/ON%20CALL%20LOGO.png?raw=true" alt="Company Logo" class="logo">
     </div>
     <div>
       <img src="https://github.com/SmartPropertySol/ESamarLots/blob/main/images/group%20picture.png?raw=true" alt="Worker Image" style="max-width: 200px; border-radius: 10px;">
     </div>
   </div>
 
+  <!-- Title -->
   <h1>Manpower Services</h1>
-  <div class="services">
+  <p><em>(click on the skills you want to book)</em></p>
+
+  <!-- Services -->
+  <div class="services" id="serviceButtons">
     <button onclick="showWorkers('carpentry')">Carpentry</button>
     <button onclick="showWorkers('masonry')">Masonry</button>
     <button onclick="showWorkers('tiling')">Tiling</button>
@@ -154,46 +181,119 @@
     <button onclick="showWorkers('driver')">Driver</button>
   </div>
 
+  <!-- Worker Display -->
   <div id="workerContainer" class="worker-container"></div>
 
+  <!-- Footer -->
   <div class="footer">
-    <p>📍 Location: Borongan City, Eastern Samar 6800 | 📞 Phone: 0928-535-4832 | 📧 Facebook: chrisgodino@yahoo.com</p>
+    <p>📍 Location: Borongan City, Eastern Samar 6800 | 📞 Phone: 0928-535-4832 | 📧 Facebook: 
+      <a href="https://www.facebook.com/EsamarRealtor" target="_blank">Visit our FB Page</a>
+    </p>
   </div>
 
-  <script>
-    const workers = {
-      carpentry: [
-        {name: 'Sanny Bendanillo', rate: '₱700/day', experience: '5 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/carpenter%20a.png?raw=true'},
-        {name: 'Juan Marcos Reyes', rate: '₱500/day', experience: '6 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/carpenter.png?raw=true'}
-      ],
-      masonry: [
-        {name: 'Carlos San Juan', rate: '₱600/day', experience: '4 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/mason%20b.png?raw=true'},
-        {name: 'Ramon Recto', rate: '₱600/day', experience: '5 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/mason.png?raw=true'}
-      ],
-      tiling: [
-        {name: 'Jorge Gonzalez', rate: '₱700/day', experience: '7 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/tiler%20a.png?raw=true'},
-        {name: 'Luis Aquino', rate: '₱700/day', experience: '6 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/tiler%20b.png?raw=true'}
-      ]
-    };
+<script>
+  // Worker Data
+  const workers = {
+    carpentry: [
+      {name: 'Sanny Bendanillo', rate: '₱700/day', experience: '5 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/carpenter%20a.png?raw=true'},
+      {name: 'Juan Marcos Reyes', rate: '₱500/day', experience: '6 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/carpenter.png?raw=true'}
+    ],
+    masonry: [
+      {name: 'Carlos San Juan', rate: '₱600/day', experience: '4 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/mason%20b.png?raw=true'},
+      {name: 'Ramon Recto', rate: '₱600/day', experience: '5 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/mason.png?raw=true'}
+    ],
+    tiling: [
+      {name: 'Jorge Gonzalez', rate: '₱700/day', experience: '7 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/tiler%20a.png?raw=true'},
+      {name: 'Luis Aquino', rate: '₱700/day', experience: '6 years', status: 'Available', img: 'https://github.com/SmartPropertySol/ESamarLots/blob/main/images/tiler%20b.png?raw=true'}
+    ],
+    plumber: [
+      {name: 'Pedro Cruz', rate: '₱650/day', experience: '8 years', status: 'Available', img: 'https://via.placeholder.com/300x200?text=Plumber'}
+    ],
+    rescue: [
+      {name: 'Mario Lopez', rate: '₱800/day', experience: '3 years', status: 'Available', img: 'https://via.placeholder.com/300x200?text=Rescue'}
+    ],
+    electrical: [
+      {name: 'Antonio Dela Cruz', rate: '₱750/day', experience: '9 years', status: 'Available', img: 'https://via.placeholder.com/300x200?text=Electrician'}
+    ],
+    driver: [
+      {name: 'Jose Ramirez', rate: '₱600/day', experience: '10 years', status: 'Available', img: 'https://via.placeholder.com/300x200?text=Driver'}
+    ]
+  };
 
-    function showWorkers(service) {
-      let workerHTML = '';
-      workers[service].forEach(worker => {
-        const fbMessage = `Hello, I would like to book ${worker.name} for ${service}. Please provide availability details.`;
-        const fbLink = `https://www.messenger.com/t/EsamarRealtor?text=${encodeURIComponent(fbMessage)}`;
+  // Show Workers
+  function showWorkers(service) {
+    let workerHTML = '';
+    workers[service]?.forEach(worker => {
+      const fbMessage = `Hello, I would like to book ${worker.name} for ${service}. Please provide availability details.`;
+      const fbLink = `https://www.messenger.com/t/EsamarRealtor?text=${encodeURIComponent(fbMessage)}`;
+      workerHTML += `
+        <div class="worker-card">
+          <img src="${worker.img}" alt="${worker.name}">
+          <h3>${worker.name}</h3>
+          <p>Rate: ${worker.rate}</p>
+          <p>Experience: ${worker.experience}</p>
+          <p>Status: ${worker.status}</p>
+          <button class="book-button" onclick="window.open('${fbLink}', '_blank')">Book</button>
+        </div>
+      `;
+    });
+    document.getElementById('workerContainer').innerHTML = workerHTML;
+  }
 
-        workerHTML += `
-          <div class="worker-card">
-            <img src="${worker.img}" alt="${worker.name}">
-            <h3>${worker.name}</h3>
-            <p>Rate: ${worker.rate}</p>
-            <p>Experience: ${worker.experience}</p>
-            <p>Status: ${worker.status}</p>
-            <button class="book-button" onclick="window.open('${fbLink}', '_blank')">Book</button>
-          </div>`;
-      });
-      document.getElementById('workerContainer').innerHTML = workerHTML;
-    }
-  </script>
+  // Visitor Counter
+  let count = localStorage.getItem("visitorCount") || 0;
+  count++;
+  localStorage.setItem("visitorCount", count);
+  document.getElementById("visitorCount").innerText = count;
+
+  // Auto-rotate services with pause/resume
+  const buttons = document.querySelectorAll("#serviceButtons button");
+  let index = 0;
+  let autoRotateInterval;
+  let autoRotateDelay = 2000; // 2s rotation
+  let resumeDelay = 5000;     // resume after 5s inactivity
+  let autoRotateActive = true;
+  let resumeTimeout;
+
+  function startAutoRotate() {
+    autoRotateInterval = setInterval(() => {
+      buttons.forEach(btn => btn.classList.remove("blink"));
+      const currentBtn = buttons[index];
+      currentBtn.classList.add("blink");
+      showWorkers(currentBtn.textContent.toLowerCase());
+      index = (index + 1) % buttons.length;
+    }, autoRotateDelay);
+  }
+
+  function stopAutoRotate() {
+    clearInterval(autoRotateInterval);
+    autoRotateActive = false;
+  }
+
+  function scheduleResume() {
+    clearTimeout(resumeTimeout);
+    resumeTimeout = setTimeout(() => {
+      if (!autoRotateActive) {
+        autoRotateActive = true;
+        startAutoRotate();
+      }
+    }, resumeDelay);
+  }
+
+  // Pause on click and resume after inactivity
+  buttons.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+      stopAutoRotate();
+      buttons.forEach(b => b.classList.remove("blink"));
+      btn.classList.add("blink");
+      index = i;
+      showWorkers(btn.textContent.toLowerCase());
+      scheduleResume();
+    });
+  });
+
+  // Start on page load
+  startAutoRotate();
+</script>
 </body>
 </html>
